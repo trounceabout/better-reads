@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import node from '@astrojs/node';
 
 export default defineConfig({
@@ -9,11 +8,7 @@ export default defineConfig({
     mode: 'standalone',
   }),
 
-  // Integrate Tailwind CSS
-  integrations: [
-    tailwind(),
-  ],
-
+  // Tailwind CSS is now configured via Vite plugin in Astro 5.2+
   // Configure TypeScript
   vite: {
     ssr: {
