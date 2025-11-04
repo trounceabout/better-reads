@@ -1,0 +1,91 @@
+---
+/**
+ * BaseLayout - Main layout for all pages
+ * Handles common structure like header, navigation, and styling
+ */
+import '../styles/globals.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  showNav?: boolean;
+}
+
+const { title, description = 'Better Reads - Track your reading', showNav = true } = Astro.props;
+const user = Astro.locals.user;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} - Better Reads</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    {
+      showNav && (
+        <nav class="bg-white shadow-sm border-b border-gray-200">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+              <div class="flex items-center gap-8">
+                <a href="/" class="text-xl font-bold text-primary-600">
+                  📚 Better Reads
+                </a>
+                {user && (
+                  <div class="hidden md:flex gap-6">
+                    <a href="/dashboard" class="text-gray-600 hover:text-gray-900">
+                      Dashboard
+                    </a>
+                    <a href="/books" class="text-gray-600 hover:text-gray-900">
+                      My Books
+                    </a>
+                    <a href="/challenges" class="text-gray-600 hover:text-gray-900">
+                      Challenges
+                    </a>
+                  </div>
+                )}
+              </div>
+
+              <div class="flex items-center gap-4">
+                {user ? (
+                  <>
+                    <span class="text-sm text-gray-600">
+                      Welcome, <strong>{user.username}</strong>
+                    </span>
+                    <a href="/api/auth/logout" class="btn-secondary text-sm">
+                      Logout
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <a href="/login" class="text-gray-600 hover:text-gray-900">
+                      Login
+                    </a>
+                    <a href="/signup" class="btn-primary text-sm">
+                      Sign Up
+                    </a>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </nav>
+      )
+    }
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <slot />
+    </main>
+
+    <footer class="bg-gray-100 border-t border-gray-200 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <p class="text-center text-gray-600 text-sm">
+          © 2024 Better Reads. A better way to track your reading.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+---
+/**
+ * Dashboard page
+ * Shows overview of current reading and progress
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const user = Astro.locals.user;
+
+// Redirect to login if not authenticated
+if (!user) {
+  return Astro.redirect('/login');
+}
+---
+
+<BaseLayout title="Dashboard" showNav={true}>
+  <div class="space-y-8">
+    <div>
+      <h1 class="text-4xl font-bold">Welcome back, {user.username}!</h1>
+      <p class="text-gray-600 mt-2">Here's your reading overview</p>
+    </div>
+
+    {/* Stats Section */}
+    <div class="grid md:grid-cols-4 gap-4">
+      <div class="card space-y-2">
+        <p class="text-gray-600">Books Reading</p>
+        <p class="text-3xl font-bold">0</p>
+      </div>
+      <div class="card space-y-2">
+        <p class="text-gray-600">Books Completed</p>
+        <p class="text-3xl font-bold">0</p>
+      </div>
+      <div class="card space-y-2">
+        <p class="text-gray-600">Pages Read</p>
+        <p class="text-3xl font-bold">0</p>
+      </div>
+      <div class="card space-y-2">
+        <p class="text-gray-600">Yearly Progress</p>
+        <p class="text-3xl font-bold">0/12</p>
+      </div>
+    </div>
+
+    {/* Currently Reading Section */}
+    <div class="card space-y-4">
+      <h2>Currently Reading</h2>
+      <p class="text-gray-600">No books started yet. <a href="/books">Add a book</a> to get started!</p>
+    </div>
+
+    {/* Quick Actions */}
+    <div class="flex gap-4">
+      <a href="/books/add" class="btn-primary">
+        Add a Book
+      </a>
+      <a href="/challenges" class="btn-secondary">
+        View Challenges
+      </a>
+    </div>
+  </div>
+</BaseLayout>

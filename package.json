@@ -1,0 +1,25 @@
+{
+  "name": "better-reads",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.5",
+    "@astrojs/node": "^9.5.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "@types/bun": "latest",
+    "astro": "^5.15.3",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "3",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  }
+}

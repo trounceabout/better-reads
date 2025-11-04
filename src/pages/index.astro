@@ -1,0 +1,64 @@
+---
+/**
+ * Home/Landing page
+ * Shows different content based on whether user is logged in
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const user = Astro.locals.user;
+
+// If user is logged in, redirect to dashboard
+if (user) {
+  return Astro.redirect('/dashboard');
+}
+---
+
+<BaseLayout title="Home" showNav={true}>
+  <div class="space-y-12">
+    {/* Hero Section */}
+    <section class="text-center space-y-4 py-12">
+      <h1 class="text-5xl font-bold text-gray-900">
+        📚 Welcome to Better Reads
+      </h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Track your reading progress, set yearly reading challenges, and discover
+        the joy of reading without the Goodreads clutter.
+      </p>
+      <div class="flex gap-4 justify-center pt-4">
+        <a href="/signup" class="btn-primary">
+          Get Started
+        </a>
+        <a href="/login" class="btn-outline">
+          Sign In
+        </a>
+      </div>
+    </section>
+
+    {/* Features Section */}
+    <section class="grid md:grid-cols-3 gap-8">
+      <div class="card space-y-3 text-center">
+        <h3 class="text-2xl">📖 Track Progress</h3>
+        <p class="text-gray-600">
+          Monitor your reading progress with percentage tracking across multiple
+          books at once.
+        </p>
+      </div>
+
+      <div class="card space-y-3 text-center">
+        <h3 class="text-2xl">🎯 Reading Challenges</h3>
+        <p class="text-gray-600">
+          Set yearly reading goals and track how many books you've completed
+          towards your target.
+        </p>
+      </div>
+
+      <div class="card space-y-3 text-center">
+        <h3 class="text-2xl">🔍 Book Search</h3>
+        <p class="text-gray-600">
+          Easily search and add books from Open Library's vast collection of
+          millions of titles.
+        </p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

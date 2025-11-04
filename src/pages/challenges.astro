@@ -1,0 +1,43 @@
+---
+/**
+ * Challenges page
+ * Displays yearly reading challenges
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const user = Astro.locals.user;
+
+// Redirect to login if not authenticated
+if (!user) {
+  return Astro.redirect('/login');
+}
+
+const currentYear = new Date().getFullYear();
+---
+
+<BaseLayout title="Reading Challenges" showNav={true}>
+  <div class="space-y-6">
+    <div class="flex justify-between items-center">
+      <h1 class="text-4xl font-bold">Reading Challenges</h1>
+      <a href="/challenges/new" class="btn-primary">
+        New Challenge
+      </a>
+    </div>
+
+    {/* Current Year Challenge */}
+    <div class="card space-y-4">
+      <h2>{currentYear} Reading Challenge</h2>
+      <p class="text-gray-600">Set a target and track your progress for this year</p>
+
+      <div class="space-y-2">
+        <p class="text-sm text-gray-600">Create a challenge to set your reading goal</p>
+      </div>
+    </div>
+
+    {/* Previous Challenges */}
+    <div class="card space-y-4">
+      <h2>Previous Challenges</h2>
+      <p class="text-gray-600">No previous challenges yet</p>
+    </div>
+  </div>
+</BaseLayout>

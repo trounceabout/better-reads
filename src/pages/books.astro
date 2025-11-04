@@ -1,0 +1,46 @@
+---
+/**
+ * Books page
+ * Displays all books and reading progress
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const user = Astro.locals.user;
+
+// Redirect to login if not authenticated
+if (!user) {
+  return Astro.redirect('/login');
+}
+---
+
+<BaseLayout title="My Books" showNav={true}>
+  <div class="space-y-6">
+    <div class="flex justify-between items-center">
+      <h1 class="text-4xl font-bold">My Books</h1>
+      <a href="/books/add" class="btn-primary">
+        Add Book
+      </a>
+    </div>
+
+    {/* Filter Tabs */}
+    <div class="flex gap-2 border-b border-gray-200">
+      <button class="px-4 py-2 text-primary-600 border-b-2 border-primary-600">
+        All
+      </button>
+      <button class="px-4 py-2 text-gray-600 hover:text-gray-900">
+        Reading
+      </button>
+      <button class="px-4 py-2 text-gray-600 hover:text-gray-900">
+        Completed
+      </button>
+      <button class="px-4 py-2 text-gray-600 hover:text-gray-900">
+        Want to Read
+      </button>
+    </div>
+
+    {/* Books List */}
+    <div class="text-center py-12">
+      <p class="text-gray-600 text-lg">No books yet. Start by adding a book!</p>
+    </div>
+  </div>
+</BaseLayout>

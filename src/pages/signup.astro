@@ -1,0 +1,96 @@
+---
+/**
+ * Signup page
+ * Handle new user registration
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const user = Astro.locals.user;
+
+// Redirect to dashboard if already logged in
+if (user) {
+  return Astro.redirect('/dashboard');
+}
+
+let error = '';
+if (Astro.request.method === 'POST') {
+  // TODO: Handle signup form submission
+  error = 'Signup functionality coming soon';
+}
+---
+
+<BaseLayout title="Sign Up" showNav={false}>
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md">
+      <div class="card space-y-6">
+        <h1 class="text-3xl font-bold text-center">Create Account</h1>
+        <p class="text-center text-gray-600">
+          Join Better Reads to start tracking your reading journey
+        </p>
+
+        {error && (
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+            {error}
+          </div>
+        )}
+
+        <form method="POST" class="space-y-4">
+          <div>
+            <label class="label">Username</label>
+            <input
+              type="text"
+              name="username"
+              required
+              class="input"
+              placeholder="your_username"
+            />
+          </div>
+
+          <div>
+            <label class="label">Email</label>
+            <input
+              type="email"
+              name="email"
+              required
+              class="input"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label class="label">Password</label>
+            <input
+              type="password"
+              name="password"
+              required
+              class="input"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <div>
+            <label class="label">Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              required
+              class="input"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button type="submit" class="btn-primary w-full">
+            Create Account
+          </button>
+        </form>
+
+        <p class="text-center text-gray-600">
+          Already have an account?{' '}
+          <a href="/login" class="text-primary-600 hover:text-primary-700 font-semibold">
+            Sign In
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
